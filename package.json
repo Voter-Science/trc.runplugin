@@ -1,0 +1,23 @@
+{
+  "name": "trc.runplugin",
+  "version": "1.0.0",
+  "description": "Debug tool to run a plugin locally ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trc",
+    "debug"
+  ],
+  "author": "MikeStall",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "repository" : 
+  {
+    "type" : "git",
+    "url" : "https://github.com/Voter-Science/trc.runplugin.git"
+  }
+}
