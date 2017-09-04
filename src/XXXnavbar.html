@@ -1,0 +1,40 @@
+<div style="background-color:lightyellow; border:dashed">
+    <b>TRC Local Debugging Toolbar</b>
+    <div id="DBG_showLogin">
+        You must login to continue:
+        <form action="/local/login" method="POST">
+            <button type='submit'><img src="https://trclog.blob.core.windows.net/public/logo/VoterScienceLoginButton.png"></img></button>
+            <br/>
+            Server url: <input size=80 type=text name="LocalDbgloginurl" value="https://TRC-login.voter-science.com"/>
+            
+        </form>
+    </div>
+    <div id="DBG_showCurrentUser">
+        <table>
+                <tr>
+                    <td>Currently logged in as:</td>
+                </tr>
+            <tr>
+                <td>
+                    <img id="DBG_showPic" src="" alt="User Profile" />
+                </td>
+                <td>
+                    <div id="DBG_showName">name</div>
+                </td>
+                <td>
+                    <a href="/local/logout">(switch user)</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="DBG_showSelector">
+        <p>Select a sheet to use:</p>
+        <table id="sheetList" border="1">
+            <tr>
+                <td>Sheet Name</td>
+                <td>Number Records</td>
+                <td>Version</td>
+            </tr>
+        </table>
+    </div>
+</div>

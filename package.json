@@ -4,7 +4,8 @@
   "description": "Debug tool to run a plugin locally ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p src"
   },
   "keywords": [
     "trc",
@@ -13,11 +14,16 @@
   "author": "MikeStall",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "request": "^2.81.0"
   },
-  "repository" : 
-  {
-    "type" : "git",
-    "url" : "https://github.com/Voter-Science/trc.runplugin.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Voter-Science/trc.runplugin.git"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.10"
   }
 }
