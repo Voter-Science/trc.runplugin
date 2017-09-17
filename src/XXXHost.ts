@@ -23,7 +23,7 @@ interface ISheetEntry {
     SheetId: string;
     Name: string;
     ParentName: string;
-    Version: number;
+    LatestVersion: number;
     CountRecords: number;
 }
 
@@ -109,7 +109,7 @@ class PluginHost {
                     var record: ISheetEntry = records[i];
                     var sheetId = record.SheetId;
                     var sheetName = record.Name;
-                    var sheetVer = record.Version;
+                    var sheetVer = record.LatestVersion;
                     var sheetCount = record.CountRecords;
 
                     if (record.ParentName != null)

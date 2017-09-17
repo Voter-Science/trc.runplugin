@@ -33,6 +33,12 @@ app.use(cookieParser());
 var cookieEndpoint = "dbg-endpoint"; // server endpoint, ie "http://localhost:40176"
 var cookieCurUser = "dbg-curuser" ; // Full JWT from a succesful login 
 
+// Auth flow is described at: https://github.com/Voter-Science/TrcLibNpm/wiki/Authentication 
+var login = {
+    client_id : 'local',
+    redirect_uri : 'http://localhost:3000/local/redirect'
+};
+
 app.use(express.static(path.join(__dirname, 'src'))); // serve up login scripts
 
 // Order matters! 
@@ -51,11 +57,16 @@ app.get("/" + indexHtml, function (req, res) {
 
 app.use(express.static(dir));
 
+
 app.post("/local/login", function (req, res) {
     var trcEndpoint = req.body.LocalDbgloginurl;
 
     res.cookie(cookieEndpoint, trcEndpoint);
-    res.redirect(trcEndpoint + "/web/login?redirectUrl=http://localhost:3000/local/redirect");
+    //  GET {endpoint}/web/login?client_id={clientId}&response_type=code&redirect_uri={redirectUri} 
+    res.redirect(trcEndpoint + "/web/login" + 
+        "?client_id=" + login.client_id + 
+        "&response_type=code" + 
+        "&redirect_uri=" + login.redirect_uri);
 });
 
 app.get("/local/logout", function (req, res) {
@@ -69,19 +80,26 @@ app.get("/local/redirect", function (req, res) {
     var errorX = req.query.error;
 
     var trcEndpoint = req.cookies[cookieEndpoint];
+    
+    //  POST {endpoint}/web/login/gettoken 
     // Do token exchange. 
     // Configure the request
     var options = {
         url: trcEndpoint + '/web/login/gettoken',
         method: 'POST',
-        form: {'code': code, 'AppName': 'local'}
+        form: {
+                'code': code, 
+                'grant_type' : 'authorization_code',
+                'redirect_uri' : login.redirect_uri,
+                'client_id' : login.client_id
+             }
     }
 
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             // Body is Json. Parse and get 'AccessToken' 
             var x = JSON.parse(body);
-            var accessToken = x["AccessToken"];
+            var accessToken = x["access_token"];
 
             // Set cookie; redirect to homepage. 
             // Homepage will now detec thte cookie and display a nav bar. 
