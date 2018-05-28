@@ -1,8 +1,9 @@
 // This is the Script file that the plugin's Index.html will pull in. 
-// It runs int the context of the browser and can assume that JQuery is loaded. 
+// It runs in the context of the browser and can assume that JQuery is loaded. 
 //  It is a mini-host and responsible to log the user in and select a sheet.
 // It should then call plugin PluginMain() 
 
+// Can't use 'require' since this is a browser file
 declare var $: any; // JQuery
 
 // The response back from a login. This provides access to a sheet. 
@@ -58,6 +59,16 @@ class PluginHost {
             }
         }
         return "";
+    }
+
+    public httpLocalSave(val : ISheetReference) {
+        $.ajax({
+            url : "http://localhost:3000/local/save",
+            type : "POST",
+            contentType: "application/json",
+            data : JSON.stringify(val), // pass as string
+            processData  : false,
+        });
     }
 
     private httpGet(
@@ -129,15 +140,21 @@ class PluginHost {
             });
     }
 
-    public selectMe(sheetId: string): void {
+    public selectMe(sheetId: string, authToken? : string): void {
         $("#DBG_showCurrentUser").hide();
         $("#DBG_showSelector").hide();
+
+        if (!!authToken)
+        {
+            this._accessToken = authToken;
+        }        
 
         var sheetRef: ISheetReference = {
             AuthToken: this._accessToken,
             Server: this._trcEndpoint,
             SheetId: sheetId
         };
+        this.httpLocalSave(sheetRef);
 
         PluginMain(sheetRef);
     }
@@ -153,9 +170,10 @@ function XXXselectMe(sheetId : string) : void
 
 // Top level hook 
 $(function () {
-        
+
     // On startup 
-    var cookieVal = _xxxhost.getCookie(PluginHost.cookieCurUser);
+    var authToken = _xxxhost.getCookie(PluginHost.cookieCurUser);
+    var sheetId = _xxxhost.getCookie("dbg-sheetid");
 
     // Inject the NavBar into the top of the document 
     var elemDiv = document.createElement('div');
@@ -167,11 +185,18 @@ $(function () {
 
         // Load complete. Toggle items based on login status. 
         // (Alternatively, we could load different navbars)        
-        if (cookieVal != "") {
+        if (authToken != "") {
             // Yes, we're logged in 
             $("#DBG_showLogin").hide();
 
-            _xxxhost.SetAccessToken(cookieVal);
+            if (sheetId != "")
+            {
+                _xxxhost.selectMe(sheetId, authToken);
+            } 
+            else 
+            {
+                _xxxhost.SetAccessToken(authToken);
+            }
         }
         else {
             // Not logged in. Hide other controls and leave the login button. 

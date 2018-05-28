@@ -1,17 +1,18 @@
 {
   "name": "trc.runplugin",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Debug tool to run a plugin locally ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p src"
+    "build": "tsc -p src",
+    "start" : "npm run build && node index.js x"
   },
   "keywords": [
     "trc",
     "debug"
   ],
-  "author": "MikeStall",
+  "author": "Voter-Science",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",

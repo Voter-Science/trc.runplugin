@@ -1,0 +1,34 @@
+<link rel="stylesheet" type="text/css" href="trcgrid.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script>
+    // This is a well-known entry point. It's called by the hosting infrastructure after login.
+    function PluginMain(sheetRef, opts) {
+        $("#server").text(sheetRef.Server);
+        $("#sheetref").text(sheetRef.SheetId);
+        $("#token").text(sheetRef.AuthToken);
+    }
+</script>
+
+<script src="https://trcanvasdata.blob.core.windows.net/code2/plugin.js"></script>
+
+<h2>Test Page</h2>
+
+<table border="1">
+    <tr>
+        <td>Server</td>
+        <td id="server">??</td>
+    </tr>
+    <tr>
+        <td>Sheet Id</td>
+        <td id="sheetref">??</td>
+    </tr>
+    <tr>
+        <td>Auth Token (jwt)</td>
+        <td id="token">??</td>
+    </tr>
+</table>
