@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "noImplicitAny": true,
-        "removeComments": true
+        "removeComments": true,
+        "declaration": true // emit .d.ts files
     }
 }

@@ -1,5 +1,6 @@
 /bower_components
 /node_modules
 *.log
+*.d.ts
 /src/*.js
 *.tgz

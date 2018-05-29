@@ -1,7 +1,7 @@
 {
   "name": "trc.runplugin",
-  "version": "1.4.0",
-  "description": "Debug tool to run a plugin locally ",
+  "version": "1.4.3",
+  "description": "Debug tool to run a plugin locally.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
