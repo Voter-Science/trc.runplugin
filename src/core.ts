@@ -148,7 +148,7 @@ export class Runner {
 
             // Switch from legacy plugin host to the new one. 
             var originalHost = "https://trcanvasdata.blob.core.windows.net/code2/plugin.js"
-            xstr = xstr.replace(originalHost, '/XXXhost.js');
+            xstr = xstr.replace(originalHost, '/XXXHost.js'); // case sensitive
 
             var creds = _cfg.Creds;
             if (!!creds) {

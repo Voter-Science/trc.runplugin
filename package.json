@@ -1,6 +1,6 @@
 {
   "name": "trc.runplugin",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Debug tool to run a plugin locally.",
   "main": "index.js",
   "scripts": {
